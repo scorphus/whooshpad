@@ -73,6 +73,9 @@ HTML_PAGE = """<!DOCTYPE html>
             gap: 10px;
         }
         .section.grow {
+            flex: 5;
+        }
+        .section.small {
             flex: 1;
         }
         button {
@@ -138,26 +141,26 @@ HTML_PAGE = """<!DOCTYPE html>
         </div>
 
         <!-- Steering -->
-        <div class="section">
+        <div class="section small">
             <button class="steer" id="btn-steer-left">&larr;</button>
             <button class="steer" id="btn-steer-right">&rarr;</button>
         </div>
 
         <!-- Emotes -->
-        <div class="section">
+        <div class="section small">
             <button class="emote" id="btn-emote-1">&#9996;</button>
             <button class="emote" id="btn-emote-2">&#128075;</button>
             <button class="emote" id="btn-emote-3">&#129307;</button>
             <button class="emote" id="btn-emote-4">&#128131;</button>
         </div>
-        <div class="section">
+        <div class="section small">
             <button class="emote" id="btn-emote-5">&#128170;</button>
             <button class="emote" id="btn-emote-6">&#127867;</button>
             <button class="emote" id="btn-emote-7">&#128077;</button>
         </div>
 
         <!-- UI Controls -->
-        <div class="section">
+        <div class="section small">
             <button class="ui-btn" id="btn-ui-toggle">UI</button>
             <button class="ui-btn" id="btn-hide-ui">Hide</button>
         </div>
