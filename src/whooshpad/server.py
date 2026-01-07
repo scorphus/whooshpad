@@ -107,7 +107,7 @@ HTML_PAGE = """<!DOCTYPE html>
             color: white;
         }
         .emote {
-            background: linear-gradient(135deg, #fdcb6e, #f39c12);
+            background: linear-gradient(135deg, #81ecec, #00cec9);
             color: #333;
             font-size: 1.5rem;
         }
