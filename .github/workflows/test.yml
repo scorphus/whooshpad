@@ -23,10 +23,13 @@ jobs:
         run: uv python install ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: uv sync
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          uv sync
 
       - name: Run tests
-        run: uv run pytest tests/ --cov=whooshpad --cov-report=term-missing --cov-report=xml
+        run: xvfb-run uv run pytest tests/ --cov=whooshpad --cov-report=term-missing --cov-report=xml
 
       - name: Upload coverage to Codecov
         if: matrix.python-version == '3.13'
