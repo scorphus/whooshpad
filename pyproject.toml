@@ -1,0 +1,51 @@
+[project]
+name = "whooshpad"
+version = "0.1.0"
+description = "A mobile-friendly remote control for MyWhoosh virtual cycling"
+readme = "README.md"
+license = "BSD-3-Clause"
+authors = [{ name = "Pablo Santiago Blum de Aguiar", email = "scorphus@gmail.com" }]
+keywords = ["mywhoosh", "cycling", "virtual", "remote", "shifter"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Games/Entertainment",
+]
+requires-python = ">=3.10"
+dependencies = ["pynput>=1.7.0"]
+
+[project.urls]
+Homepage = "https://github.com/scorphus/whooshpad"
+Repository = "https://github.com/scorphus/whooshpad"
+Issues = "https://github.com/scorphus/whooshpad/issues"
+
+[project.scripts]
+whooshpad = "whooshpad:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/whooshpad"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.coverage.run]
+omit = ["src/whooshpad/__main__.py"]
+
+[dependency-groups]
+dev = ["ruff", "pytest", "pytest-cov", "pytest-mock"]
