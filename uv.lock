@@ -453,7 +453,6 @@ wheels = [
 
 [[package]]
 name = "whooshpad"
-version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "pynput" },
