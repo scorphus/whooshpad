@@ -187,7 +187,7 @@ HTML_PAGE = """<!DOCTYPE html>
         </div>
         <div class="section small">
             <button class="emote" id="btn-emote-5">&#128170;</button>
-            <button class="emote" id="btn-emote-6">&#127867;</button>
+            <button class="emote" id="btn-emote-6">&#127838;</button>
             <button class="emote" id="btn-emote-7">&#128077;</button>
         </div>
 
