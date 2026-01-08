@@ -168,8 +168,8 @@ HTML_PAGE = """<!DOCTYPE html>
 
         <!-- Shifting -->
         <div class="section grow">
-            <button class="shift-up" id="btn-shift-up">+</button>
-            <button class="shift-down" id="btn-shift-down">-</button>
+            <button class="shift-up" id="btn-shift-up">&lt;</button>
+            <button class="shift-down" id="btn-shift-down">&gt;</button>
         </div>
 
         <!-- Steering -->

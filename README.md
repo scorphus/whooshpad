@@ -29,7 +29,7 @@ pip install whooshpad
 
 ## Controls
 
-- **Shifting**: + (easier) / - (harder)
+- **Shifting**: < (easier) / > (harder)
 - **Steering**: Left / Right arrows
 - **Emotes**: Peace, Wave, Fist bump, Dab, Elbow flick, Toast, Thumbs up
 - **UI**: Toggle minimal UI / Hide all controls
