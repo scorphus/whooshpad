@@ -65,12 +65,15 @@ KEYS = {
     "hide_ui": "h",  # Hide all (HD only)
 }
 
+FAVICON = """data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48cGF0aCBmaWxsPScjMDAwMDAxJyBkPSdNNDYgNWwtMS45NyA5Ljg0YTM1LjcgMzUuNyAwIDAwLTE0LjY1IDYuMDlsLTguMzctNS41OC0yLjgzIDIuODMtMi44MyAyLjgzIDUuNTggOC4zN2EzNS43IDM1LjcgMCAwMC02LjA5IDE0LjY1TDUgNDZ2OGw5Ljg0IDEuOTdhMzUuNyAzNS43IDAgMDA2LjA5IDE0LjY1bC01LjU4IDguMzcgMi44MyAyLjgzIDIuODMgMi44MyA4LjM3LTUuNThhMzUuNyAzNS43IDAgMDAxNC42NSA2LjA5TDQ2IDk1aDhsMS45Ny05Ljg0YTM1LjcgMzUuNyAwIDAwMTQuNjUtNi4wOWw4LjM3IDUuNTggMi44My0yLjgzIDIuODMtMi44My01LjU4LTguMzdhMzUuNyAzNS43IDAgMDA2LjA5LTE0LjY1TDk1IDU0di04bC05Ljc5LTEuOTZhMzUuNyAzNS43IDAgMDAtNi4xLTE0LjcybDUuNTQtOC4zMS0yLjgzLTIuODMtMi44My0yLjgzLTguMzEgNS41NGEzNS43IDM1LjcgMCAwMC0xNC43Mi02LjFMNTQgNWgtOHonLz48Y2lyY2xlIGN4PSc1MCcgY3k9JzUwJyByPScyNi42NScgZmlsbD0nI2ZmY2QyZicvPjxjaXJjbGUgY3g9JzM3LjEyJyBjeT0nNTAnIHI9JzEyJyBmaWxsPScjMDBiODk0Jy8+PHRleHQgeD0nMzcuMTInIHk9JzU2LjM2JyBmb250LXNpemU9JzE4JyBmb250LXdlaWdodD0nYm9sZCcgZm9udC1mYW1pbHk9J0FyaWFsJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPScjZmZmJz4mbHQ7PC90ZXh0PjxjaXJjbGUgY3g9JzYyLjg4JyBjeT0nNTAnIHI9JzEyJyBmaWxsPScjZDYzMDMxJy8+PHRleHQgeD0nNjIuODgnIHk9JzU2LjM1JyBmb250LXNpemU9JzE4JyBmb250LXdlaWdodD0nYm9sZCcgZm9udC1mYW1pbHk9J0FyaWFsJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPScjZmZmJz4mZ3Q7PC90ZXh0Pjwvc3ZnPgo="""  # noqa
+
 HTML_PAGE = """<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Whooshpad</title>
+    <link rel="icon" type="image/svg+xml" href=""" + FAVICON + """>
     <style>
         * {
             box-sizing: border-box;

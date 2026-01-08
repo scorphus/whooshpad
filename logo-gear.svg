@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Gear -->
+  <path fill="#000001" d="M46 5l-1.97 9.84a35.7 35.7 0 00-14.65 6.09l-8.37-5.58-2.83 2.83-2.83 2.83 5.58 8.37a35.7 35.7 0 00-6.09 14.65L5 46v8l9.84 1.97a35.7 35.7 0 006.09 14.65l-5.58 8.37 2.83 2.83 2.83 2.83 8.37-5.58a35.7 35.7 0 0014.65 6.09L46 95h8l1.97-9.84a35.7 35.7 0 0014.65-6.09l8.37 5.58 2.83-2.83 2.83-2.83-5.58-8.37a35.7 35.7 0 006.09-14.65L95 54v-8l-9.79-1.96a35.7 35.7 0 00-6.1-14.72l5.54-8.31-2.83-2.83-2.83-2.83-8.31 5.54a35.7 35.7 0 00-14.72-6.1L54 5h-8z"/>
+  <!-- Inner circle -->
+  <circle cx="50" cy="50" r="26.65" fill="#ffcd2f"/>
+  <!-- Left eye -->
+  <circle cx="37.12" cy="50" r="12" fill="#00b894"/>
+  <text x="37.12" y="56.36" font-size="18" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle" fill="#fff">&lt;</text>
+  <!-- Right eye -->
+  <circle cx="62.88" cy="50" r="12" fill="#d63031"/>
+  <text x="62.88" y="56.35" font-size="18" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle" fill="#fff">&gt;</text>
+</svg>

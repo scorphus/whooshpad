@@ -1,4 +1,7 @@
-# Whooshpad
+<p align="center">
+  <img src="logo-gear.svg" alt="Whooshpad logo" width="128">
+  <h1 tabindex="-1" class="heading-element" dir="auto" align="center">Whooshpad</h1>
+</p>
 
 [![Build](https://github.com/scorphus/whooshpad/actions/workflows/test.yml/badge.svg)](https://github.com/scorphus/whooshpad/actions/workflows/test.yml)
 [![Coverage](https://codecov.io/gh/scorphus/whooshpad/branch/main/graph/badge.svg)](https://codecov.io/gh/scorphus/whooshpad)
