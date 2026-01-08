@@ -3,11 +3,13 @@
 
 """Tests for whooshpad server."""
 
+import platform
 from io import BytesIO
 
 import pytest
+from pynput.keyboard import KeyCode
 
-from whooshpad.server import KEYS, HTML_PAGE, WhooshpadHandler, get_local_ip
+from whooshpad.server import HTML_PAGE, KEYS, WhooshpadHandler, get_local_ip
 
 
 def test_keys_contains_shifting():
@@ -30,7 +32,12 @@ def test_keys_contains_emotes():
     """Test that emote keys are defined."""
     for i in range(1, 8):
         assert f"emote_{i}" in KEYS
-        assert KEYS[f"emote_{i}"] == str(i)
+        key = KEYS[f"emote_{i}"]
+        if platform.system() in ("Darwin", "Windows"):
+            assert isinstance(key, KeyCode)
+            assert key.vk is not None
+        else:
+            assert key == str(i)
 
 
 def test_keys_contains_ui_controls():
@@ -167,8 +174,10 @@ def test_handler_do_post_emote(mock_handler, mocker):
 
     WhooshpadHandler.do_POST(mock_handler)
 
-    mock_keyboard.press.assert_called_once_with("1")
-    mock_keyboard.release.assert_called_once_with("1")
+    # On macOS, emotes use KeyCode with virtual key codes
+    expected_key = KEYS["emote_1"]
+    mock_keyboard.press.assert_called_once_with(expected_key)
+    mock_keyboard.release.assert_called_once_with(expected_key)
 
 
 def test_handler_do_post_unknown_action(mock_handler):

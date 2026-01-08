@@ -4,11 +4,12 @@
 """Whooshpad server - serves the mobile remote control interface."""
 
 import argparse
+import platform
 import socket
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 try:
-    from pynput.keyboard import Controller
+    from pynput.keyboard import Controller, KeyCode
 except ImportError:  # pragma: no cover
     print("Error: pynput is required. Install it with: pip install pynput")
     print("On macOS, you may need to grant Accessibility permissions.")
@@ -16,19 +17,50 @@ except ImportError:  # pragma: no cover
 
 keyboard = Controller()
 
+# Virtual key codes for top-row number keys (not numpad)
+_NUMBER_VK = {
+    "Darwin": {
+        "1": 18,
+        "2": 19,
+        "3": 20,
+        "4": 21,
+        "5": 23,
+        "6": 22,
+        "7": 26,
+    },
+    "Windows": {
+        "1": 0x31,
+        "2": 0x32,
+        "3": 0x33,
+        "4": 0x34,
+        "5": 0x35,
+        "6": 0x36,
+        "7": 0x37,
+    },
+}
+
+
+def _make_key(char):
+    """Create a key, using virtual key codes for numbers on macOS/Windows."""
+    system = platform.system()
+    if system in _NUMBER_VK and char in _NUMBER_VK[system]:
+        return KeyCode.from_vk(_NUMBER_VK[system][char])
+    return char
+
+
 # MyWhoosh keyboard shortcuts
 KEYS = {
     "shift_up": "i",  # Easier gear
     "shift_down": "k",  # Harder gear
     "steer_left": "a",  # Steer left
     "steer_right": "d",  # Steer right
-    "emote_1": "1",  # Peace
-    "emote_2": "2",  # Wave
-    "emote_3": "3",  # Fist bump
-    "emote_4": "4",  # Dab
-    "emote_5": "5",  # Elbow flick
-    "emote_6": "6",  # Toast
-    "emote_7": "7",  # Thumbs up
+    "emote_1": _make_key("1"),  # Peace
+    "emote_2": _make_key("2"),  # Wave
+    "emote_3": _make_key("3"),  # Fist bump
+    "emote_4": _make_key("4"),  # Dab
+    "emote_5": _make_key("5"),  # Elbow flick
+    "emote_6": _make_key("6"),  # Toast
+    "emote_7": _make_key("7"),  # Thumbs up
     "ui_toggle": "u",  # Minimal UI
     "hide_ui": "h",  # Hide all (HD only)
 }
