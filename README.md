@@ -36,6 +36,7 @@ pip install whooshpad
 - **Steering**: Left / Right arrows
 - **Emotes**: Peace, Wave, Fist bump, Dab, Elbow flick, Toast, Thumbs up
 - **UI**: Toggle minimal UI / Hide all controls
+- **Screenshot**: System screenshot (Cmd+Shift+3 on macOS, PrintScreen on Windows)
 
 ## Options
 

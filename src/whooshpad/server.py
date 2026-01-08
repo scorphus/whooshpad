@@ -9,7 +9,7 @@ import socket
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 try:
-    from pynput.keyboard import Controller, KeyCode
+    from pynput.keyboard import Controller, Key, KeyCode
 except ImportError:  # pragma: no cover
     print("Error: pynput is required. Install it with: pip install pynput")
     print("On macOS, you may need to grant Accessibility permissions.")
@@ -46,6 +46,21 @@ def _make_key(char):
     if system in _NUMBER_VK and char in _NUMBER_VK[system]:
         return KeyCode.from_vk(_NUMBER_VK[system][char])
     return char
+
+
+def _screenshot():
+    """Take a screenshot using system keyboard shortcuts."""
+    system = platform.system()
+    if system == "Darwin":
+        # macOS: Cmd+Shift+3
+        with keyboard.pressed(Key.cmd):
+            with keyboard.pressed(Key.shift):
+                keyboard.press("3")
+                keyboard.release("3")
+    elif system == "Windows":
+        # Windows: PrintScreen
+        keyboard.press(Key.print_screen)
+        keyboard.release(Key.print_screen)
 
 
 # MyWhoosh keyboard shortcuts
@@ -198,6 +213,7 @@ HTML_PAGE = """<!DOCTYPE html>
         <div class="section small">
             <button class="ui-btn" id="btn-ui-toggle">UI</button>
             <button class="ui-btn" id="btn-hide-ui">Hide</button>
+            <button class="ui-btn" id="btn-screenshot">&#128248;</button>
         </div>
 
         <div class="status" id="status">Ready</div>
@@ -243,6 +259,7 @@ HTML_PAGE = """<!DOCTYPE html>
             'btn-emote-7': ['emote_7', 'Thumbs up'],
             'btn-ui-toggle': ['ui_toggle', 'UI toggle'],
             'btn-hide-ui': ['hide_ui', 'Hide UI'],
+            'btn-screenshot': ['screenshot', 'Screenshot'],
         };
 
         // Bind all buttons
@@ -279,7 +296,12 @@ class WhooshpadHandler(SimpleHTTPRequestHandler):
         """Handle key press commands."""
         if self.path.startswith("/key/"):
             action = self.path[5:]  # Remove "/key/" prefix
-            if action in KEYS:
+            if action == "screenshot":
+                _screenshot()
+                print("[SCREENSHOT] Triggered")
+                self.send_response(200)
+                self.end_headers()
+            elif action in KEYS:
                 key = KEYS[action]
                 keyboard.press(key)
                 keyboard.release(key)

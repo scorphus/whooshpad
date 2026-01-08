@@ -14,6 +14,7 @@ from whooshpad.server import (
     KEYS,
     WhooshpadHandler,
     _make_key,
+    _screenshot,
     get_local_ip,
 )
 
@@ -42,6 +43,35 @@ def test_make_key_returns_string_on_other_platforms(mocker):
     mocker.patch("whooshpad.server.platform.system", return_value="Linux")
     key = _make_key("1")
     assert key == "1"
+
+
+def test_screenshot_on_macos(mocker):
+    """Test _screenshot uses Cmd+Shift+3 on macOS."""
+    mocker.patch("whooshpad.server.platform.system", return_value="Darwin")
+    mock_keyboard = mocker.patch("whooshpad.server.keyboard")
+    _screenshot()
+    assert mock_keyboard.pressed.call_count == 2
+    mock_keyboard.press.assert_called_once_with("3")
+    mock_keyboard.release.assert_called_once_with("3")
+
+
+def test_screenshot_on_windows(mocker):
+    """Test _screenshot uses PrintScreen on Windows."""
+    mocker.patch("whooshpad.server.platform.system", return_value="Windows")
+    mock_keyboard = mocker.patch("whooshpad.server.keyboard")
+    mock_key = mocker.patch("whooshpad.server.Key")
+    _screenshot()
+    mock_keyboard.press.assert_called_once_with(mock_key.print_screen)
+    mock_keyboard.release.assert_called_once_with(mock_key.print_screen)
+
+
+def test_screenshot_on_other_platforms(mocker):
+    """Test _screenshot does nothing on unsupported platforms."""
+    mocker.patch("whooshpad.server.platform.system", return_value="Linux")
+    mock_keyboard = mocker.patch("whooshpad.server.keyboard")
+    _screenshot()
+    mock_keyboard.press.assert_not_called()
+    mock_keyboard.release.assert_not_called()
 
 
 def test_keys_contains_shifting():
@@ -228,3 +258,14 @@ def test_handler_do_post_invalid_path(mock_handler):
     WhooshpadHandler.do_POST(mock_handler)
 
     mock_handler.send_error.assert_called_once_with(404)
+
+
+def test_handler_do_post_screenshot(mock_handler, mocker):
+    """Test POST /key/screenshot triggers screenshot."""
+    mock_screenshot = mocker.patch("whooshpad.server._screenshot")
+    mock_handler.path = "/key/screenshot"
+
+    WhooshpadHandler.do_POST(mock_handler)
+
+    mock_screenshot.assert_called_once()
+    mock_handler.send_response.assert_called_once_with(200)
