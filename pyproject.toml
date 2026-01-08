@@ -48,4 +48,4 @@ select = ["E", "F", "I", "W"]
 omit = ["src/whooshpad/__main__.py"]
 
 [dependency-groups]
-dev = ["ruff", "pytest", "pytest-cov", "pytest-mock"]
+dev = ["ruff", "pytest", "pytest-cov", "pytest-mock", "ty"]
