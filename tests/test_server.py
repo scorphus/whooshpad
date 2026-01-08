@@ -9,7 +9,39 @@ from io import BytesIO
 import pytest
 from pynput.keyboard import KeyCode
 
-from whooshpad.server import HTML_PAGE, KEYS, WhooshpadHandler, get_local_ip
+from whooshpad.server import (
+    HTML_PAGE,
+    KEYS,
+    WhooshpadHandler,
+    _make_key,
+    get_local_ip,
+)
+
+
+def test_make_key_returns_keycode_for_numbers_on_macos_windows(mocker):
+    """Test _make_key returns KeyCode for numbers on macOS/Windows."""
+    mocker.patch("whooshpad.server.platform.system", return_value="Darwin")
+    key = _make_key("1")
+    assert isinstance(key, KeyCode)
+    assert key.vk == 18  # macOS vk for "1"
+
+    mocker.patch("whooshpad.server.platform.system", return_value="Windows")
+    key = _make_key("2")
+    assert isinstance(key, KeyCode)
+    assert key.vk == 0x32  # Windows vk for "2"
+
+
+def test_make_key_returns_string_for_non_numbers():
+    """Test _make_key returns string for non-number characters."""
+    key = _make_key("a")
+    assert key == "a"
+
+
+def test_make_key_returns_string_on_other_platforms(mocker):
+    """Test _make_key returns string on unsupported platforms."""
+    mocker.patch("whooshpad.server.platform.system", return_value="Linux")
+    key = _make_key("1")
+    assert key == "1"
 
 
 def test_keys_contains_shifting():
